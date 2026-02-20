@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f0e0d; --paper: #f5f2ee; --cream: #ede9e3;
+      --accent: #c8502a; --muted: #8a8278; --rule: #d6d0c8;
+      --mono: 'DM Mono', monospace; --serif: 'DM Serif Display', serif; --sans: 'DM Sans', sans-serif;
+    }
+    body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+    header { position: sticky; top: 0; z-index: 100; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 0 4vw; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+    .back { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .back:hover { color: var(--ink); }
+
+    .page-wrap { max-width: 760px; margin: 0 auto; padding: 6vh 4vw 10vh; }
+
+    .article-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+    h1 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 2rem; }
+    .lede { font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 1.5rem; margin-bottom: 3rem; line-height: 1.75; }
+    .rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+    h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; margin-top: 2.5rem; }
+    p { margin-bottom: 1.25rem; font-size: 1rem; color: #3a3733; line-height: 1.8; }
+    p:last-child { margin-bottom: 0; }
+
+    .pull-quote { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--ink); text-align: center; padding: 2rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 2.5rem 0; line-height: 1.5; }
+
+    .meta { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.25rem; }
+    footer { border-top: 1px solid var(--rule); padding: 2rem 4vw; display: flex; justify-content: space-between; }
+    .footer-note { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">YourName.dev</a>
+  <a href="index.html" class="back">← Back</a>
+</header>
+
+<div class="page-wrap">
+  <div class="article-label">// About Me</div>
+  <h1>Who I Am &amp; What Drives Me</h1>
+
+  <p class="lede">"I believe the best security work is invisible — not because it hides, but because it's done right. My mission is to build systems and practices resilient enough to disappear into the background."</p>
+
+  <hr class="rule">
+
+  <div class="meta">Background</div>
+  <h2>Where I Come From</h2>
+  <p>My path into technology started with a fundamental question: why do systems fail? That curiosity led me deep into the world of Linux environments, network infrastructure, and eventually security operations. I didn't just want to use systems — I wanted to understand them at every layer.</p>
+  <p>I've spent time working in technical support, operations, and incident response roles — each one sharpening a different edge of my skill set. From managing tickets and escalating issues under pressure, to tracing the root cause of a security alert at 2 AM, I've learned to stay calm when things get complicated.</p>
+
+  <hr class="rule">
+
+  <h2>How I Work</h2>
+  <p>I'm a command-line native. I believe the terminal is the most honest interface — there's no hiding behind GUIs when something goes wrong. I write Python for automation and analysis, Java for structured problem-solving, and I've built a genuine appreciation for the discipline that Linux demands.</p>
+  <p>When I approach a problem, I start by mapping it. Whether that's a network topology, an incident timeline, or a gap analysis against a security framework, I want the full picture before I start making changes. That habit has saved me from many well-intentioned mistakes.</p>
+
+  <div class="pull-quote">"Systems don't fail randomly — they fail predictably, at the seams we didn't design carefully enough."</div>
+
+  <h2>What I'm Working Toward</h2>
+  <p>I'm particularly drawn to cloud infrastructure and its security implications. The shift to distributed, dynamic environments has fundamentally changed what it means to defend a network — and I find that challenge genuinely exciting. I'm building skills in cloud architecture, gap analysis methodologies, and network topology design with a long view toward security engineering roles.</p>
+  <p>Beyond the technical, I care about communication. Security teams fail not because they lack tools, but because they lack shared understanding. I work to translate technical findings into clear, actionable language for anyone who needs to make decisions.</p>
+
+  <hr class="rule">
+
+  <h2>Outside the Terminal</h2>
+  <p>When I'm not at a keyboard, I'm usually thinking about systems of a different kind — logistics, history, how large organizations coordinate. I find that reading broadly about how complex systems are managed (and mismanaged) makes me a better engineer. The patterns are often the same.</p>
+</div>
+
+<footer>
+  <div class="footer-note">© 2025 Your Name</div>
+  <a href="index.html" class="footer-note" style="text-decoration:none;color:var(--muted)">← Home</a>
+</footer>
+</body>
+</html>

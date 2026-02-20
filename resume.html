@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f0e0d; --paper: #f5f2ee; --cream: #ede9e3;
+      --accent: #c8502a; --muted: #8a8278; --rule: #d6d0c8;
+      --mono: 'DM Mono', monospace; --serif: 'DM Serif Display', serif; --sans: 'DM Sans', sans-serif;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; min-height: 100vh; }
+    header { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 0 4vw; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+    .back { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .back:hover { color: var(--ink); }
+
+    .page-outer { display: flex; flex-direction: column; align-items: center; padding: 5vh 4vw; }
+    .page-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* The paper */
+    .paper {
+      background: white;
+      width: 100%;
+      max-width: 760px;
+      min-height: 1056px; /* ~letter size */
+      padding: 3.5rem 4rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e8e4de;
+      position: relative;
+    }
+
+    .paper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: var(--accent);
+    }
+
+    .resume-header { border-bottom: 2px solid var(--ink); padding-bottom: 1.25rem; margin-bottom: 1.75rem; }
+    .resume-name { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; }
+    .resume-title { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin: 0.3rem 0 0.75rem; }
+    .resume-contact { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .resume-contact a { color: var(--muted); text-decoration: none; }
+    .resume-contact a:hover { color: var(--accent); }
+
+    .r-section { margin-bottom: 1.5rem; }
+    .r-section-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .r-entry { margin-bottom: 1rem; }
+    .r-entry-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; }
+    .r-role { font-weight: 500; font-size: 0.95rem; }
+    .r-date { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.05em; }
+    .r-org { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+    .r-bullets { padding-left: 1rem; }
+    .r-bullets li { font-size: 0.88rem; margin-bottom: 0.25rem; color: #3a3733; line-height: 1.55; }
+
+    .skill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .r-tag { font-family: var(--mono); font-size: 0.7rem; padding: 0.2rem 0.6rem; border: 1px solid var(--rule); color: var(--ink); background: var(--cream); }
+
+    .dl-row { display: flex; justify-content: center; margin-top: 2.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--paper); background: var(--ink); padding: 0.7rem 1.4rem; border: 1px solid var(--ink); transition: background 0.2s; }
+    .btn:hover { background: var(--accent); border-color: var(--accent); }
+
+    footer { border-top: 1px solid var(--rule); padding: 2rem 4vw; display: flex; justify-content: space-between; background: var(--paper); margin-top: 4vh; }
+    .footer-note { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+    @media print { header, footer, .dl-row, .page-label { display: none; } body { background: white; } .paper { box-shadow: none; border: none; } }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">YourName.dev</a>
+  <a href="index.html" class="back">← Back</a>
+</header>
+
+<div class="page-outer">
+  <div class="page-label">// Resume — One-Page Overview</div>
+
+  <div class="paper">
+    <div class="resume-header">
+      <div class="resume-name">Your Full Name</div>
+      <div class="resume-title">Systems &amp; Security Professional</div>
+      <div class="resume-contact">
+        <span>your.email@email.com</span>
+        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+        <span>City, State</span>
+      </div>
+    </div>
+
+    <div class="r-section">
+      <div class="r-section-title">Summary</div>
+      <p style="font-size:0.9rem;color:#3a3733;line-height:1.65;">Systems and security professional with experience in incident response, Linux administration, and technical operations. Proficient in Python, Java, and command-line workflows. Focused on building resilient infrastructure and clear, actionable security practices.</p>
+    </div>
+
+    <div class="r-section">
+      <div class="r-section-title">Experience</div>
+
+      <div class="r-entry">
+        <div class="r-entry-head">
+          <span class="r-role">Your Most Recent Role</span>
+          <span class="r-date">2023 — Present</span>
+        </div>
+        <div class="r-org">Organization Name · City, ST</div>
+        <ul class="r-bullets">
+          <li>Responded to and documented security incidents using structured ticketing workflows</li>
+          <li>Maintained Linux systems, performed patch management, and monitored system logs</li>
+          <li>Developed Python scripts to automate log analysis and reduce triage time</li>
+        </ul>
+      </div>
+
+      <div class="r-entry">
+        <div class="r-entry-head">
+          <span class="r-role">Previous Role Title</span>
+          <span class="r-date">2021 — 2023</span>
+        </div>
+        <div class="r-org">Previous Organization · City, ST</div>
+        <ul class="r-bullets">
+          <li>Managed IT support tickets and escalated complex issues to senior engineers</li>
+          <li>Supported network infrastructure including switch configuration and topology documentation</li>
+          <li>Authored internal knowledge base articles for common incident types</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="r-section">
+      <div class="r-section-title">Education</div>
+      <div class="r-entry">
+        <div class="r-entry-head">
+          <span class="r-role">Degree Title — Major</span>
+          <span class="r-date">Graduated 2021</span>
+        </div>
+        <div class="r-org">University Name</div>
+      </div>
+    </div>
+
+    <div class="r-section">
+      <div class="r-section-title">Skills</div>
+      <div class="skill-row">
+        <span class="r-tag">Python</span>
+        <span class="r-tag">Java</span>
+        <span class="r-tag">Command Line</span>
+        <span class="r-tag">Linux</span>
+        <span class="r-tag">Incident Response</span>
+        <span class="r-tag">Ticketing Systems</span>
+        <span class="r-tag">Network Topology</span>
+        <span class="r-tag">Gap Analysis</span>
+        <span class="r-tag">Cloud Infrastructure</span>
+      </div>
+    </div>
+
+    <div class="r-section">
+      <div class="r-section-title">Certifications &amp; Training</div>
+      <div class="r-entry">
+        <div class="r-entry-head">
+          <span class="r-role">Certification Name</span>
+          <span class="r-date">2024</span>
+        </div>
+        <div class="r-org">Issuing Body</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dl-row">
+    <a href="resume.pdf" class="btn" download>↓ Download PDF</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-note">© 2025 Your Name</div>
+  <a href="index.html" class="footer-note" style="text-decoration:none;color:var(--muted)">← Home</a>
+</footer>
+</body>
+</html>

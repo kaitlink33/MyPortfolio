@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0e0d;
+      --paper: #f5f2ee;
+      --cream: #ede9e3;
+      --accent: #c8502a;
+      --muted: #8a8278;
+      --rule: #d6d0c8;
+      --mono: 'DM Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 4vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    nav { display: flex; gap: 2rem; }
+
+    nav a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .hero-text {
+      padding: 8vh 6vw 8vh 4vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--rule);
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-mission {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 38ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--ink);
+      transition: background 0.2s, color 0.2s;
+      width: fit-content;
+    }
+    .btn:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+    }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+    .hero-nav {
+      padding: 8vh 4vw 8vh 6vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .section-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: padding-left 0.2s;
+    }
+    .section-link:first-child { border-top: 1px solid var(--rule); }
+    .section-link:hover { padding-left: 0.5rem; }
+    .section-link:hover .sl-arrow { transform: translateX(4px); }
+
+    .sl-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; }
+    .sl-desc { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+    .sl-arrow { font-size: 1.2rem; color: var(--accent); transition: transform 0.2s; }
+
+    /* ── SECTIONS ── */
+    section { padding: 8vh 4vw; border-top: 1px solid var(--rule); }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+    }
+
+    /* ── ABOUT ── */
+    #about .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vw;
+      align-items: start;
+    }
+
+    .about-mission {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--muted);
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--accent);
+    }
+
+    .about-snippet {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* ── RESUME / CV ── */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3vw;
+    }
+
+    .doc-card {
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+      transition: transform 0.2s;
+    }
+    .doc-card:hover { transform: translateY(-4px); }
+    .doc-card:hover .doc-paper { box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+    .doc-paper {
+      background: white;
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      margin-bottom: 1rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-paper::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 24px 24px 0;
+      border-color: transparent var(--paper) transparent transparent;
+    }
+
+    .doc-line { height: 8px; background: var(--rule); border-radius: 4px; }
+    .doc-line.short { width: 40%; }
+    .doc-line.med { width: 65%; }
+    .doc-line.long { width: 85%; }
+    .doc-line.full { width: 100%; }
+    .doc-line.title { height: 14px; width: 55%; background: var(--ink); opacity: 0.2; margin-bottom: 0.5rem; }
+    .doc-divider { height: 1px; background: var(--rule); margin: 0.25rem 0; }
+
+    .doc-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .doc-title { font-family: var(--serif); font-size: 1.2rem; }
+
+    /* ── PROJECTS ── */
+    .projects-wrapper { position: relative; }
+
+    .projects-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .project-card:hover { background: white; border-color: var(--ink); }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      transition: gap 0.2s, color 0.2s;
+    }
+    .project-link:hover { gap: 0.8rem; color: var(--accent); }
+    .project-link svg { transition: transform 0.2s; }
+    .project-link:hover svg { transform: translateX(3px); }
+
+    .projects-nav {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .pnav-btn {
+      background: none;
+      border: 1px solid var(--rule);
+      width: 40px; height: 40px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .pnav-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+    /* ── SKILLS & INTERESTS ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; }
+
+    .skill-group-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--rule);
+      background: white;
+      color: var(--ink);
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .tag:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); cursor: default; }
+
+    .interest-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.95rem;
+    }
+    .interest-item:first-child { border-top: 1px solid var(--rule); }
+    .interest-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem 4vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-note {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-text { border-right: none; border-bottom: 1px solid var(--rule); min-height: 50vh; }
+      #about .grid, .doc-grid, .two-col { grid-template-columns: 1fr; }
+      .projects-track { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">YourName.dev</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#resume">Resume</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text fade-in">
+    <div class="hero-label">// portfolio</div>
+    <h1>Security &amp;<br><em>Systems</em><br>Professional</h1>
+    <p class="hero-mission">Building resilient systems through disciplined engineering, principled security practices, and a curiosity-driven approach to understanding complex infrastructure.</p>
+    <a href="about.html" class="btn">Read More About Me ↗</a>
+  </div>
+  <div class="hero-nav fade-in" style="transition-delay:0.15s">
+    <a href="#about" class="section-link">
+      <div><div class="sl-title">About Me</div><div class="sl-desc">Mission &amp; Background</div></div>
+      <span class="sl-arrow">→</span>
+    </a>
+    <a href="#resume" class="section-link">
+      <div><div class="sl-title">Resume</div><div class="sl-desc">One-page overview</div></div>
+      <span class="sl-arrow">→</span>
+    </a>
+    <a href="#resume" class="section-link">
+      <div><div class="sl-title">Full CV</div><div class="sl-desc">Complete record</div></div>
+      <span class="sl-arrow">→</span>
+    </a>
+    <a href="#projects" class="section-link">
+      <div><div class="sl-title">Projects</div><div class="sl-desc">GitHub repositories</div></div>
+      <span class="sl-arrow">→</span>
+    </a>
+    <a href="#skills" class="section-link">
+      <div><div class="sl-title">Skills &amp; Interests</div><div class="sl-desc">Technical profile</div></div>
+      <span class="sl-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2>About Me</h2>
+  </div>
+  <div class="grid fade-in" style="transition-delay:0.1s">
+    <div>
+      <p class="about-mission">"My mission is to build and defend secure, efficient systems — bridging the gap between technical depth and operational clarity."</p>
+      <br/>
+      <a href="about.html" class="btn btn-ghost" style="margin-top:1rem">More Here →</a>
+    </div>
+    <div class="about-snippet">
+      <p>I'm a systems and security professional with hands-on experience in incident response, infrastructure management, and technical problem-solving. I approach every challenge with curiosity and precision — understanding not just how things work, but why they fail.</p>
+      <br>
+      <p>Whether it's tracing a network anomaly, scripting automation in Python, or building a clean command-line workflow on Linux, I find satisfaction in mastering the craft at every layer of the stack.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME & CV -->
+<section id="resume">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2>Resume &amp; CV</h2>
+  </div>
+  <div class="doc-grid fade-in" style="transition-delay:0.1s">
+
+    <!-- RESUME -->
+    <a href="resume.html" class="doc-card">
+      <div class="doc-paper">
+        <div class="doc-line title"></div>
+        <div class="doc-divider"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line med"></div>
+        <div class="doc-divider"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line med"></div>
+        <div class="doc-divider"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line med"></div>
+        <div class="doc-line short"></div>
+      </div>
+      <div class="doc-label">Document Preview</div>
+      <div class="doc-title">Resume →</div>
+    </a>
+
+    <!-- FULL CV -->
+    <a href="cv.html" class="doc-card">
+      <div class="doc-paper">
+        <div class="doc-line title"></div>
+        <div class="doc-divider"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line med"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-divider"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-line med"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line long"></div>
+        <div class="doc-divider"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line long"></div>
+      </div>
+      <div class="doc-label">Full Record</div>
+      <div class="doc-title">Curriculum Vitae →</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2>Projects</h2>
+  </div>
+
+  <div class="projects-wrapper fade-in" style="transition-delay:0.1s">
+    <div class="projects-track" id="projectsTrack">
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Python · Security</div>
+          <div class="project-title">Log Analyzer</div>
+          <div class="project-desc">Automated incident response log parsing tool — identifies anomalous patterns and generates structured reports.</div>
+        </div>
+        <a href="https://github.com/yourusername/log-analyzer" class="project-link" target="_blank">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Linux · Bash</div>
+          <div class="project-title">Sysmon Setup</div>
+          <div class="project-desc">Hardened Linux system monitoring configuration with automated alerting and baseline comparison scripts.</div>
+        </div>
+        <a href="https://github.com/yourusername/sysmon-setup" class="project-link" target="_blank">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Java · CLI</div>
+          <div class="project-title">Ticketing CLI</div>
+          <div class="project-desc">Command-line ticketing system with priority queues, status tracking, and export to structured JSON/CSV.</div>
+        </div>
+        <a href="https://github.com/yourusername/ticketing-cli" class="project-link" target="_blank">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Networking</div>
+          <div class="project-title">Network Mapper</div>
+          <div class="project-desc">Python tool for topology discovery and gap analysis, generating visual network maps from scan data.</div>
+        </div>
+        <a href="https://github.com/yourusername/network-mapper" class="project-link" target="_blank">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Cloud · Python</div>
+          <div class="project-title">Cloud Audit Tool</div>
+          <div class="project-desc">Automated cloud configuration auditing for identifying misconfigurations and policy violations across services.</div>
+        </div>
+        <a href="https://github.com/yourusername/cloud-audit" class="project-link" target="_blank">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">IR · Documentation</div>
+          <div class="project-title">IR Playbook</div>
+          <div class="project-desc">Structured incident response playbook templates with decision trees and escalation checklists.</div>
+        </div>
+        <a href="https://github.com/yourusername/ir-playbook" class="project-link" target="_blank">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="projects-nav">
+      <button class="pnav-btn" id="prevBtn" onclick="cycleProjects(-1)">←</button>
+      <button class="pnav-btn" id="nextBtn" onclick="cycleProjects(1)">→</button>
+      <span id="projectCounter" style="font-family:var(--mono);font-size:0.7rem;color:var(--muted);align-self:center;margin-left:0.5rem;letter-spacing:0.1em;">1 — 3 of 6</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS & INTERESTS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <h2>Skills &amp; Interests</h2>
+  </div>
+  <div class="two-col fade-in" style="transition-delay:0.1s">
+    <div>
+      <div class="skill-group-label">// Technical Skills</div>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">Java</span>
+        <span class="tag">Command Line</span>
+        <span class="tag">Linux</span>
+        <span class="tag">Incident Response</span>
+        <span class="tag">Ticketing Systems</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">// Areas of Interest</div>
+      <div>
+        <div class="interest-item"><span class="interest-dot"></span>Cloud Infrastructure</div>
+        <div class="interest-item"><span class="interest-dot"></span>Gap Analysis</div>
+        <div class="interest-item"><span class="interest-dot"></span>Network Topology</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-note">© 2025 Your Name</div>
+  <a href="https://github.com/yourusername" class="footer-note" target="_blank" style="text-decoration:none;color:var(--muted)">GitHub ↗</a>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  faders.forEach(f => observer.observe(f));
+  // trigger hero immediately
+  document.querySelectorAll('.hero .fade-in').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 100 + parseInt(el.style.transitionDelay || '0') * 1000);
+  });
+
+  // Projects carousel (3 at a time on desktop)
+  const allCards = Array.from(document.querySelectorAll('.project-card'));
+  let start = 0;
+  const perPage = () => window.innerWidth <= 768 ? 1 : 3;
+
+  function cycleProjects(dir) {
+    const pp = perPage();
+    start = Math.max(0, Math.min(start + dir * pp, allCards.length - pp));
+    allCards.forEach((c, i) => {
+      c.style.display = (i >= start && i < start + pp) ? 'flex' : 'none';
+    });
+    document.getElementById('projectCounter').textContent = `${start + 1} — ${Math.min(start + pp, allCards.length)} of ${allCards.length}`;
+  }
+  cycleProjects(0);
+</script>
+</body>
+</html>
