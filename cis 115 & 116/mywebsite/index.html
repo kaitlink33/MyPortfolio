@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<title> Kaitlin Kendig's Website </title>
+
+	<link rel="stylesheet" type="text/css" href="fancy.css">
+
+</head>
+
+<body>
+
+	<h1> Welcome to my page </h1>
+
+	<p> This page was built for my class, <strong>CIS115</strong>, at <em>Kansas State University</em>.</p>
+
+	<p>I may use it as a location to share what has been on my mind as well as a little about me.</p>
+
+	<p>I will also display some of the projects I've been working on.</p>
+
+	<p>I look forward to expanding further on this in the future.</p>
+
+	<p>
+
+		<a href="about.html">About Me</a>
+
+		<a href="resume.html">My Resume</a>
+
+	</p>
+
+	<h2>Tic-Tac-Toe</h2>
+
+	<div id="turn">x's turn</div>
+
+	<table align="center">
+
+		<tr>
+
+			<td></td><td></td><td></td>
+
+		</tr>
+
+		<tr>
+
+			<td></td><td></td><td></td>
+
+		</tr>
+
+		<tr>
+
+			<td></td><td></td><td></td>
+
+		</tr>
+
+	</table>
+
+
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script>
+var turn = "x";
+$("td").on("click", function () {
+	console.log("clicked");
+    var $square = $(this);
+    if ($square.text() == "") {
+        $square.text(turn);
+        if (turn == "x") {
+            turn = "o";
+        } else {
+            turn = "x";
+        }
+        $("#turn").text(turn + "'s turn");
+    }
+});
+	</script>
+
+</body>
+
+</html>
+
