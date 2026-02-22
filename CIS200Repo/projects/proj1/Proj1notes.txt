@@ -1,0 +1,14 @@
+Proj1notes.txt
+Where is your hometown? Osborne, KS
+What year were you born? 2006
+What was an error you made in your program? How did you fix it?
+I ran into some issues with parsing user input in such a way that
+ the returned value could be operated with mathematically and then
+  again converted into a printable form. I resolved this by taking 
+  the user scanner input as a string and converting it into an integer
+   (in the same line for cleanliness). I operated with the integer(subtraction), 
+   and then converted the result into a string again on the same line again.
+    This worked by adding + "" to the end result of an operation and clarifying 
+    the end result to be a string at the start of typecasting. I then used a formatted
+     print (string var) and resolved the problem. 
+     ___

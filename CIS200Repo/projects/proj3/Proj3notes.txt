@@ -1,0 +1,73 @@
+1. Think of a sample test case for your program that 
+is different than the examples above, 
+is a composite (non-prime) number, 
+and has at least one repeating factor.
+ 
+For that example number, trace through the program by hand.
+Write out when variables are assigned different values, 
+when you are checking the condition of a loop or if-statement 
+(and what the result of the condition is), and when things are printed.
+ 
+Your answer should essentially explain line-by-line 
+what the program will do with that input.
+
+Answer 1.)
+I picked num = 108 for this test case. Its prime factorization is 1*2*2*3*3*3.
+The most frequent factor, 3, occurs 3 times.
+It passes input validation because num <= 0 is not true.
+All of my initial variables are the same, besides num. 
+I print the start of my factorization statement, and then add factors 
+as the program finds them.
+This process begins at 2 and checks every number up to num for divisibility. 
+If divisible, the number is added to the statement however many times it is divisible and a count is kept
+accordingly inside currentDivisorTimes, which is compared against highestDivisorTimes for each iteration. 
+If greater (or equal), the current divisior var is changed to the mostCommonDivisor with preference to the 
+larger number. The value of currentDivisorTimes is reset each time divisor increases. In this case, mostCommonDivisor = 3
+and highestDivisorTimes = 3.
+
+ 
+ 
+2. List at least 5 other test cases that cover different 
+kinds of cases that should be handled by your program. 
+You don't need to work these out by hand, 
+but you should state what they are and what
+your program does for those inputs.
+
+Answer 2.)
+
+Case: num = 13 (prime, positive)
+Enter a positive whole number: 13
+
+13 = 1 * 13
+13 is prime.
+
+Case: num = -4 (divisible, not positive)
+Enter a positive whole number: -4
+Input was not positive. Enter a positive whole number: (continually asks until condition met)
+
+Case: num = -7 (prime, not positive)
+Enter a positive whole number: -7
+Input was not positive. Enter a positive whole number: (continually asks until condition met)
+
+Case: num = 24 (divisible, positive)
+Enter a positive whole number: 24
+
+18 = 1 * 2 * 2 * 2 * 3
+Most common factor of 24 is 2, which occurred 3 times.
+
+Case: num = 36 (divisible, has two mostCommonDivisors, chooses the largest)
+Enter a positive whole number: 36
+
+18 = 1 * 2 * 2 * 3 * 3
+Most common factor of 36 is 3, which occurred 2 times.
+
+
+ 
+3. Describe an error you made when writing the program. 
+How did you fix it?
+
+Answer 3.)
+I initially forgot to reset my currentDivisorTimes variable before increasing divisor variable. 
+As a result, the last divisor was always perceived as the mostCommonDivisor by holding how many times total 
+num was divisible.
+I added this reset to fix the error as a catch near the end of my outside while loop.

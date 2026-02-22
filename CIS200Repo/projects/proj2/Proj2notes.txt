@@ -1,0 +1,69 @@
+//adding to make visible for commit
+Kate Kendig kendig@ksu.edu
+CIS200 Proj2notes
+1/28/2026
+
+
+1.
+Think of a sample test case for your program that is different than the one given. 
+Write out the different inputs, and then work through the driving time calculation 
+by hand. Clearly state both your calculated speed in mph (using the speed factor) 
+as well as your answer in driving days, hours, minutes, and seconds. 
+How does that compare to your program's output?
+
+Real:
+Enter the distance in miles: 80
+Enter your speed factor, where 0 is the slowest and 9 is the fastest: 7
+Are you traveling round trip? (y/n) y
+Enter max driving hours per day: 6
+Total driving time for 160 miles at 72.50 mph: 0 days, 2 hours, 12 minutes, 24 seconds
+
+My Program (it's the same):
+Enter the distance in miles: 80
+Enter your speed factor, where 0 is the slowest and 9 is the fastest: 7
+Are you traveling round trip? (y/n) y
+Enter max driving hours per day: 6
+Total driving time for 160 miles at 72.50 mph: 0 days, 2 hours, 12 minutes, 24 seconds
+
+2.
+List at least 3 other test cases that cover different kinds of special cases 
+that should be handled by your program. You don't need to work these out by hand,
+but you should state what they are and what your program does in those cases.
+
+I used the following code to error handle situations relating to the variable speedFactor
+(which was the sole variable of concern with variable scope):
+
+    if (speedFactor < 0 || speedFactor > 9) {
+            System.out.println("Speed factor must be between 0 and 9.");
+            if (speedFactor < 0){
+                System.out.println("The speed factor should not be negative");
+            }
+            else {
+                System.out.println("The speed factor should not be greater than 9.");
+            }
+            return;
+        }
+It handles cases where the value given is negative or greater than nine 
+and prints the message accordingly before returning.
+
+Case examples are -3, -1, & 11. Responses are "The speed factor should not be negative",
+"The speed factor should not be negative", and "The speed factor should
+ not be greater than 9" respectively.
+
+
+
+3.
+Describe an error you made when writing the program. How did you fix it?
+
+One error that puzzled me for a while was input overflow from the scanner. 
+It was storing a space in buffer without me realizing it and throwing an error in testing. 
+It was difficult because the code was compiling, yet it couldn't run to completion. 
+I went in and verified my work and logic in scanner. 
+After that didn't work I went back to the textbook and read on the buffer space 
+associated with the scanning of integers. I caught the error by adding an s.nextline(); .
+
+I also had issues with typcasting in operations, but I resolved that easily. 
+
+An issue I had to especially learn from was string comparisons for the y/n of round trips. 
+I used .equals("") for this. 
+//adding to make visible for commit

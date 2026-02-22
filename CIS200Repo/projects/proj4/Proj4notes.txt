@@ -1,0 +1,136 @@
+Proj4notex.txt
+Kaitlin Kendig
+
+Questions
+1. 
+Error condition test cases: Make a list of at least three test cases
+ that cover different types of error condition in your program.
+ For each one, state how your program handles that type of error. 
+ (For example, you might include a test case where the time span was negative.)
+
+2.
+Date/time span test cases: Make a list of three (non error condition) test cases
+ different than the example given that cover different kinds of starting dates 
+ and time spans. For each one, state what kind of situation you are testing and 
+ what dates your program includes in the output for that test case.
+
+3.
+Temperature swing test cases: Make a list of three (non error condition) test cases
+ that cover different kinds of situations for the biggest temperature swing portion 
+ of the project. For each one, state what kind of situation you are testing and 
+ what your program outputs as the maximum temperature swing for that case. 
+ Think about biggest swings that involve a low to a high, or a high to a low, 
+ or begin/end at the beginning/end of the list of dates.
+
+4.
+Error and fix: Describe an error you made when writing the program.
+ How did you fix it?
+
+
+
+Answers
+1. Error condition test cases:
+
+Invalid month outside valid range (e.g., entering "13/15/25" as the start date)
+My program validates that the month is between 1 and 12 on lines 38-41.
+When the user enters month 13, the condition (startMonth < 1 || startMonth > 12)
+is true, so the program prints "Bad start date: the month must be between 1 and 12."
+and exits with return. This prevents attempting to access daysInMonth[12], which
+would be out of bounds since the array only has indices 0-11.
+
+Invalid day that doesn't exist in that month (e.g., entering "2/30/25" for February)
+My program first checks if the year is a leap year (lines 44-45) to set 
+February's day count, then validates the day on lines 46-50. For "2/30/25", since
+2025 is not a leap year, daysInMonth[1] = 28. The variable totalDaysInMonth gets
+the value 28, and since 30 > 28, the program prints "Bad start date: 30 does not
+exist in the month of 2." and exits. This catches impossible dates like 2/30, 4/31,
+9/31, 11/31, etc.
+
+Non-positive time span (e.g., entering -5 or 0 for the time span)
+My program validates the time span on lines 58-61. If the user enters -5 or 0,
+the condition (span < 1) is true, so the program prints "Bad span: the time span
+should be at least 1 day." and exits. This prevents creating arrays with size <= 0,
+which would cause an error when trying to allocate the months[], days[], years[],
+lows[], and highs[] arrays.
+
+
+2. Date/time span test cases:
+
+Crossing a year boundary: start date "12/29/25", time span 5 days
+Situation being tested: The date-building loop must correctly roll from December
+into January and increment the year from 25 to 26.
+Dates included in output:
+12/29/25, 12/30/25, 12/31/25, 1/1/26 (month resets to 1, year++), 1/2/26
+
+Leap year with February 29th: start date "2/27/96", time span 4 days
+Situation being tested: 1996 is a leap year (divisible by 4 and not a century year),
+so February should have 29 days. The loop must include 2/29/96 instead of jumping
+from 2/28/96 directly to 3/1/96.
+Dates included in output: 
+2/27/96, 2/28/96, 2/29/96 (leap btw), 3/1/96 (March after 29th)
+
+Single-day time span: start date "7/4/26", time span 1 day
+Situation being tested: The program should correctly handle the minimum valid span.
+With only one day, the date-building loop (lines 68-93) doesn't execute at all since
+the loop condition is i = 1; i < 1 (false). Only index 0 gets filled with the start
+date. For temperature swing, my code starts the loop at i = 1, so with span = 1, the
+swing loop also doesn't execute, meaning swingAmount stays at -1 (what initialized to).
+Dates included in output:
+7/4/26 (only this date in summary)
+
+
+
+3. Temperature swing test cases:
+
+Biggest swing involves a low-to-high jump (warming trend)
+Test input: 3 days with lows = [10, 8, 5] and highs = [25, 22, 60]
+Situation being tested: The largest temperature change is from the low on day 3 (5)
+to the high on day 3 (60), giving a swing of 55 degrees. However, my code compares
+adjacent days, so it actually looks at day 2-to-day 3. Between these days, the
+lowest low is min(8, 5) = 5 and highest high is max(22, 60) = 60.
+Output: "Biggest temperature swing: 55 degrees, from 5 degrees on [day3 date] to
+60 degrees on [day3 date]."
+(Note: My implementation finds the min/max across the pair, so both temps might be
+from the same day or different days in the pair)
+
+Biggest swing involves a high-to-low drop (cooling trend)
+Test input: 2 days with lows = [10, 8] and highs = [85, 15]
+Situation being tested: A sharp temperature drop where day 1's high (85) is much
+warmer than day 2's low (8). The swing between these adjacent days is calculated
+as: lowest low = min(10, 8) = 8, highest high = max(85, 15) = 85, swing = 77.
+Output: "Biggest temperature swing: 77 degrees, from 8 degrees on [day2 date] to
+85 degrees on [day1 date]."
+
+Biggest swing occurs at the very end of the list
+Test input: 4 days with lows = [30, 32, 31, 5] and highs = [45, 48, 46, 10]
+Situation being tested: The first few day-to-day transitions have small swings
+(day 1-2: 48-30=18, day 2-3: 48-31=17), but the last transition (day 3-4) has
+a much larger swing. Between days 3 and 4: lowest low = min(31, 5) = 5,
+highest high = max(46, 10) = 46, swing = 41.
+Output: "Biggest temperature swing: 41 degrees, from 5 degrees on [day4 date] to
+46 degrees on [day3 date]."
+This tests that the loop correctly examines all adjacent pairs through the end
+of the arrays (i goes from 1 to span-1).
+
+
+
+4. Error and fix:
+
+When I first wrote the temperature swing section, I initialized swingAmount to 0
+instead of -1. This caused a problem when I tested a case where all temperature
+readings were identical (e.g., every day had low=50, high=50). In that scenario,
+every calculated swing was 0, so the condition (swing > swingAmount) was never true,
+which meant previousTemp, currTemp, previousDate, and currDate never got updated
+from their initial values (0 and " "). The output would show "from 0 degrees on
+to 0 degrees on " which was clearly wrong.
+
+I fixed this by changing line 163 from:
+    int swingAmount = 0;
+to:
+    int swingAmount = -1;
+
+Now, since all real swings are >= 0, the very first pair of days (i=1) will always
+meet (swing > swingAmount) because any value >= 0 is greater than -1. This
+guarantees that previousTemp, currTemp, previousDate, and currDate get set to actual
+data from the arrays on the first iteration, so even if all swings are 0, the output
+shows real dates and temperatures from my user's input.
